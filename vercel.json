@@ -18,7 +18,14 @@
       "src": "/api/(.*)",
       "dest": "/server/src/index.ts"
     },
-    { "handle": "filesystem" },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/client/assets/$1"
+    },
+    {
+      "src": "/(favicon.*|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.ico)",
+      "dest": "/client/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "/client/index.html"
