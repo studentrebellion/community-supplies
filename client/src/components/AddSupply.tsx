@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { ai, supplies as suppliesApi } from '@/lib/api';
 import { categories } from '@/data/categories';
 import { Loader2, Upload, Sparkles, Camera } from 'lucide-react';
+import { compressImage } from '@/lib/image';
 
 interface AddSupplyProps {
   onNavigate?: (tab: string) => void;
@@ -28,17 +29,14 @@ export default function AddSupply({ onNavigate }: AddSupplyProps) {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { alert('Image must be less than 5MB'); return; }
 
     setIsDrafting(true);
 
-    // Show preview
-    const reader = new FileReader();
-    reader.onloadend = () => setUploadedImage(reader.result as string);
-    reader.readAsDataURL(file);
-
     try {
-      const draft = await ai.draftFromImage(file);
+      const { dataUrl, file: compressedFile } = await compressImage(file);
+      setUploadedImage(dataUrl);
+
+      const draft = await ai.draftFromImage(compressedFile);
       setForm(prev => ({
         ...prev,
         name: draft.name || '',
