@@ -97,7 +97,7 @@ Return ONLY valid JSON, no markdown or explanation.`;
 export async function generateIllustrationPrompt(itemName: string, description: string): Promise<string> {
   const result = await callGemini([
     {
-      text: `Create a brief, vivid description for generating a minimalist hand-drawn illustration of: "${itemName}". Context: ${description}. The illustration should be a simple line drawing with a warm, friendly feel, suitable for a community sharing library catalog. Return only the description, no explanation.`,
+      text: `Create a brief description for a STRICTLY BLACK AND WHITE line-art illustration of: "${itemName}". Context: ${description}. IMPORTANT: Do NOT include or describe any colors. The illustration should be a simple monochrome ink outline suitable for a community sharing library catalog. Return only the description.`,
     },
   ]);
 
@@ -124,7 +124,7 @@ export async function generateIllustration(itemName: string, description: string
       body: JSON.stringify({
         contents: [{
           parts: [{
-            text: `Generate a simple black and white line drawing illustration on a clean white background. No color, no shading, no text or labels. Minimalist pen-and-ink style. Subject: ${illustrationPrompt}`,
+            text: `STRICTLY BLACK AND WHITE ONLY. A minimalist, monochrome pen-and-ink style line drawing on a pure white background. ZERO COLOR MUST BE PRESENT. Subject: ${illustrationPrompt}`,
           }],
         }],
         generationConfig: {
