@@ -49,9 +49,9 @@ export default function AddSupply({ onNavigate }: AddSupplyProps) {
       setHouseRules(draft.houseRules || []);
       setShowForm(true);
     } catch (err: any) {
-      console.error('AI draft error:', err);
+      console.error('Image analysis error:', err);
       const msg = err.message?.includes('rate limit')
-        ? 'AI is temporarily rate limited. You can fill in details manually or try again in a minute.'
+        ? 'The system is temporarily rate limited. You can fill in details manually or try again in a minute.'
         : 'Failed to analyze image. Fill in details manually.';
       alert(msg);
       setShowForm(true);
