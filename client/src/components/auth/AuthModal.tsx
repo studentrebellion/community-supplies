@@ -87,7 +87,7 @@ export default function AuthModal({ isOpen, onClose, mode: initialMode, onSucces
           onClick={(e) => e.stopPropagation()}
         >
           <h2 className="text-2xl font-serif font-bold text-deep-brown mb-6">
-            {mode === 'login' ? 'Welcome Back' : 'Join the Community'}
+            {mode === 'login' ? 'Welcome' : 'Join the Community'}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
