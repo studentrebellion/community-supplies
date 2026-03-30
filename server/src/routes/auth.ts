@@ -35,8 +35,8 @@ router.post('/signup', async (req, res: Response) => {
     const passwordHash = await bcrypt.hash(password, 12);
 
     const { rows } = await pool.query(
-      `INSERT INTO profiles (username, name, password_hash, signal_contact)
-       VALUES ($1, $2, $3, $4)
+      `INSERT INTO profiles (username, name, password_hash, signal_contact, vouched_at)
+       VALUES ($1, $2, $3, $4, NOW())
        RETURNING id, username, name, role, vouched_at, signal_contact`,
       [username.toLowerCase(), name, passwordHash, signal_contact]
     );
